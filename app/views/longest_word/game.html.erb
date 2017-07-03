@@ -1,0 +1,23 @@
+ <% def generate_grid(grid_size)
+  # TODO: generate random grid of letters
+  f_grid = []
+  grid = ("A"..."Z").to_a
+  grid_size.times { f_grid << grid.sample }
+  f_grid
+end %>
+
+
+<h1>******** Welcome to the longest word-game !********</h1>
+
+<h3>Here is your grid :</h3>
+<% grid = generate_grid(9) %>
+ <%= grid.join(" ") %><br><br>
+
+
+<form action="/score" method="get">
+  <label for="question">What's your best shot ?</label>
+  <input type="hidden" name="grid" value="<%= grid.join %>">
+  <input type="hidden" name="s_time" value="<%= Time.now %>">
+  <input type="text" name="question">
+  <input type="submit" value="send">
+</form>
